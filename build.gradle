@@ -1,12 +1,9 @@
 apply plugin: 'scala'
 
-sourceCompatibility = 1.8
-
 version = '1.0'
 
 repositories {
     mavenCentral()
-
 }
 
 sourceSets {
