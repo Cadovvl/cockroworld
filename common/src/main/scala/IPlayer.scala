@@ -1,4 +1,4 @@
 
-trait IPlayer extends IAbilities with IGoals {
+trait IPlayer extends IAbilities with IGoals with IInfo {
 
 }

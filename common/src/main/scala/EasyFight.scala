@@ -1,5 +1,3 @@
-import java.util
-
 import scala.util.Random
 
 /**
@@ -28,7 +26,7 @@ class EasyFight(val players: Array[IPlayer]) extends Game {
   val BASE_ATTACK = 5.0
 
   class Gamer(val player: IPlayer) {
-    var hp = player.getHP() * BASE_HP
+    var hp = player.getHP * BASE_HP
   }
 
   var gamers: Array[Gamer] = Array()
@@ -36,44 +34,48 @@ class EasyFight(val players: Array[IPlayer]) extends Game {
   var attacker: Int = 0
   var defender: Int = 0
 
-  override protected def move(): Unit = {
+  override protected def step(): Unit = {
+    move()
+    act()
+  }
+
+  private def move(): Unit = {
     attacker = Utils.choose(fears)
     defender = Utils.choose(fears)
   }
 
+  private def act(): Unit = {
+    println(players(attacker).getName + " решил ударить " + players(defender).getName)
+    if (attacker == defender) {
+      println(players(attacker).getName + " вовремя понял, что захотел ударить себя...")
+    } else if (Utils.choose(
+      Array(
+        players(defender).getLuck,
+        players(defender).getLuck + BASE_UNLUCKY)) == 0) {
+      println(players(defender).getName + " сумел увернуться от атаки " + players(attacker).getName)
+    } else {
+      val dmg = (BASE_ATTACK + random.nextDouble() % BASE_ATTACK) * players(attacker).getStrength
+      gamers(defender).hp -= dmg
+      println(players(attacker).getName +
+        " наносит " + dmg
+        + " урона " + players(defender).getName
+        + "; Оставшееся здоровье:")
+      gamers.foreach(p => print(p.player.getName + " : " + p.hp + "; "))
+    }
+    println("\n" + "#" * 40)
+  }
+
   override protected def init(): Unit = {
     gamers = for (p <- players) yield new Gamer(p)
-    fears = for (p <- players) yield p.getFear()
+    fears = for (p <- players) yield p.getFear
   }
 
   override protected def isEnded(): Boolean = gamers.exists(_.hp <= 0)
 
   override protected def end(): Unit = {
-    for (i <- 0 to gamers.length-1)
-      if (gamers(i).hp < 0)
-        println("Игрок " + i + " слегка окочурился...")
+    gamers.withFilter(_.hp < 0)
+      .foreach(p => println("Игрок " + p.player.getName + " слегка окочурился..."))
     gamers = Array()
     fears = Array()
-  }
-
-  override protected def act(): Unit = {
-    println("Игрок " + attacker + " решил ударить игрока " + defender)
-    if (attacker == defender) {
-      println("Игрок " + attacker + " вовремя понял, что захотел ударить себя...")
-    } else if (Utils.choose(
-      Array(
-        players(defender).getLuck(),
-        players(defender).getLuck() + BASE_UNLUCKY)) == 0) {
-      println("Игрок " + defender + " сумел увернуться от атаки " + attacker)
-    } else {
-      val dmg = (BASE_ATTACK + random.nextDouble() % BASE_ATTACK) * players(attacker).getStrength()
-      gamers(defender).hp -= dmg
-      println("Игрок " + attacker +
-        " наносит " + dmg
-        + " урона игроку " + defender
-        + "; Оставшееся здоровье:")
-      gamers.foreach(p => print("hp: " + p.hp + "; "))
-      println("\n" + "#" * 40 )
-    }
   }
 }

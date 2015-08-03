@@ -3,9 +3,7 @@ abstract class Game {
 
   protected def init(): Unit
 
-  protected def move(): Unit
-
-  protected def act(): Unit
+  protected def step(): Unit
 
   protected def isEnded(): Boolean
 
@@ -13,9 +11,8 @@ abstract class Game {
 
   def play(): Unit = {
     init()
-    while(!isEnded()) {
-      move()
-      act()
+    while (!isEnded()) {
+      step()
     }
     end()
   }
