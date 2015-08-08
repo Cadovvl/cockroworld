@@ -1,8 +1,6 @@
 package com.cocroworld.domain
 
-/**
- * Created by Anna on 7/27/2015.
- */
 class Gene {
+     //реализация через Int будет потом
      val genes: Array[Boolean] = Array(true, false, false)
 }

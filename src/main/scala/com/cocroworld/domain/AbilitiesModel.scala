@@ -1,15 +1,21 @@
 package com.cocroworld.domain
 
-/**
- * Created by Anna on 7/27/2015.
- */
-class AbilitiesModel extends CockroachModel {
+import common.{IQuestInfo, IAbilities}
+
+class AbilitiesModel extends CockroachModel with IAbilities {
   var abilities: Gene = new Gene()
 
-  def train(quest: Quest, action: Action, goalModel: GoalModel): Unit = {
-    train(cockroach => {
-      val resultForCurrentAbility = quest.getExpectedResult(cockroach.gene, action)
-      goalModel.evaluateResult(resultForCurrentAbility)
-    })
+  def train(): Unit = {
+     //как то будет реализовано и использовано
   }
+
+  override def getStrength: Double = 1
+
+  override def getLuck: Double = 1
+
+  override def getSneak: Double = 1
+
+  override def getHP: Double = 1
+
+  override def getIntellegence: Double = 1
 }

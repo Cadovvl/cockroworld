@@ -1,16 +1,20 @@
 package com.cocroworld.domain
 
-/**
- * Created by Anna on 7/27/2015.
- */
-class GoalModel extends CockroachModel {
+import common.{IGoals}
+
+class GoalModel extends CockroachModel with IGoals {
   var goal: Gene = new Gene()
 
-  def takeDecision(quest: Quest): Action = {
-    new Action()
+  def evaluateQuestResult(): Int = {
+    0
   }
 
-  def evaluateResult(result: ActionResult): Int = {
-       0
-  }
+
+  override def getGreed: Double = 1
+
+  override def getFear: Double = 1
+
+  override def getCommunity: Double = 1
+
+  override def getExp: Double = 1
 }

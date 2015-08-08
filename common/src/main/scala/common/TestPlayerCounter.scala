@@ -1,3 +1,5 @@
+package common
+
 object TestPlayerCounter {
   private var count = 0
   def getNext = {
