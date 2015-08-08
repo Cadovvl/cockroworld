@@ -1,3 +1,5 @@
+package common
+
 
 abstract class Game {
 

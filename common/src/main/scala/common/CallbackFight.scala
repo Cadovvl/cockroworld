@@ -1,3 +1,5 @@
+package common
+
 import scala.util.Random
 
 /**
@@ -123,5 +125,13 @@ object FightCallbackFactory {
     FightCallbackFactory.getMissByLuckAction(),
     FightCallbackFactory.getDamageAction())
 }
+
+object CallbackFight {
+   def getQuestInfo():IQuestInfo  = {
+       new SimpleQuestInfo
+   }
+}
+
+
 
 

@@ -1,3 +1,4 @@
+package common
 
 trait IAbilities {
   def getStrength: Double

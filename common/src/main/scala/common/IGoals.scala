@@ -1,4 +1,7 @@
+package common
+
 trait IGoals {
+
   def getGreed: Double
 
   def getExp: Double

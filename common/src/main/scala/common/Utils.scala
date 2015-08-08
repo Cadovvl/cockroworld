@@ -1,3 +1,5 @@
+package common
+
 import scala.util.Random
 
 object Utils {
