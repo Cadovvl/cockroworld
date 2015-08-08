@@ -22,13 +22,6 @@ sourceSets {
 dependencies {
     compile 'org.scala-lang:scala-library:2.11.1'
     compile 'org.scalaz:scalaz-core_2.10:7.0.8'
-    compile module(':cockroworld:common')
     testCompile 'org.scala-lang:scala-library:2.11.1'
 }
 
-
-idea {
-    project {
-        languageLevel = '1.8'
-    }
-}
